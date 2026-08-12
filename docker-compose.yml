@@ -1,0 +1,38 @@
+version: "3.8"
+
+# GUI (Gazebo, Tkinter) and microphone access require host passthrough,
+# which varies by OS. This compose file targets Linux hosts with X11 and
+# PulseAudio/ALSA. Run `xhost +local:docker` on the host before starting,
+# so container GUI windows are allowed to display.
+#
+# Usage:
+#   xhost +local:docker
+#   docker compose run --rm interplanetar
+#
+# Then, inside the container, follow the README's per-task terminal
+# instructions using `ros2 launch` / `ros2 run` as normal. Since a single
+# container only gives one shell, open additional shells into the same
+# running container with:
+#   docker compose exec interplanetar bash
+
+services:
+  interplanetar:
+    build: .
+    image: interplanetar-2026:latest
+    container_name: interplanetar_2026
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - __NV_PRIME_RENDER_OFFLOAD=1
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia
+      - __VK_LAYER_NV_optimus=NVIDIA_only
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev/snd:/dev/snd
+    devices:
+      - /dev/snd
+      - /dev/dri
+    privileged: true
+    stdin_open: true
+    tty: true
