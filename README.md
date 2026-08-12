@@ -67,6 +67,29 @@ source ~/ros2_ws/install/setup.bash
 ros2 run questions vision_node
 ```
 
+### Bonus: SLAM
+
+With Terminals 1 and 2 already running, add a fourth terminal to build a
+live map while the robot navigates:
+```bash
+source /opt/ros/jazzy/setup.bash
+ros2 launch turtlebot4_navigation slam.launch.py
+```
+
+To visualize the map being built in real time:
+```bash
+ros2 launch turtlebot4_viz view_navigation.launch.py
+```
+
+To save the finished map:
+```bash
+ros2 run nav2_map_server map_saver_cli -f ~/interplanetar_map
+```
+
+No custom code is needed — `slam_toolbox` (via TurtleBot4's official launch
+files) builds the map from the same `/scan` and odometry data the navigator
+is already using while driving the waypoint route.
+
 ### Implementation notes
 - **Navigation**: go-to-goal controller (proportional heading + distance
   control) driven by ground-truth pose (`/sim_ground_truth_pose`).

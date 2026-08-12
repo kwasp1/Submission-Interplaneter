@@ -5,6 +5,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     ros-jazzy-turtlebot4-simulator \
     ros-jazzy-turtlebot4-desktop \
+    ros-jazzy-turtlebot4-navigation \
+    ros-jazzy-turtlebot4-viz \
+    ros-jazzy-slam-toolbox \
     ros-jazzy-ros-gz \
     ros-jazzy-cv-bridge \
     python3-colcon-common-extensions \
