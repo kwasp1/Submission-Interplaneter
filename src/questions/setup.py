@@ -21,10 +21,10 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='your_name',
-    maintainer_email='your_email@domain.com',
-    description='Assignment package',
-    license='TODO: License declaration',
+    maintainer='aditya-roy',
+    maintainer_email='adityaroy.jpg@gmail.com',
+    description='interplanter',
+    license='',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
