@@ -1,7 +1,8 @@
 # Interplanetar 2026 Recruitment Submission
 
 Two tasks completed: **Task 1** (Voice-Controlled Quadrotor & Telemetry) and
-**Task 2** (Autonomous Navigation & Vision, TurtleBot4).
+**Task 2** (Autonomous Navigation & Vision, TurtleBot4), including Task 2's
+**SLAM** and **Nav2** bonus components.
 
 Tested on Ubuntu 24.04, ROS 2 Jazzy, Gazebo Harmonic.
 
@@ -89,6 +90,26 @@ ros2 run nav2_map_server map_saver_cli -f ~/interplanetar_map
 No custom code is needed — `slam_toolbox` (via TurtleBot4's official launch
 files) builds the map from the same `/scan` and odometry data the navigator
 is already using while driving the waypoint route.
+
+### Bonus: Nav2
+
+With SLAM already running (above), add a fifth terminal:
+```bash
+source /opt/ros/jazzy/setup.bash
+ros2 launch turtlebot4_navigation nav2.launch.py use_sim_time:=true
+```
+
+> `use_sim_time:=true` is required — without it, Nav2's controller server
+> uses the wall clock while SLAM's map→odom transform uses simulation
+> time, causing every incoming transform to be rejected as "too old".
+
+To send the robot to a goal autonomously via Nav2 (rather than the custom
+waypoint navigator), open RViz:
+```bash
+ros2 launch turtlebot4_viz view_navigation.launch.py
+```
+Click **"2D Nav Goal"** in the RViz toolbar, then click a point on the map.
+Nav2 plans a path and drives the robot there.
 
 ### Implementation notes
 - **Navigation**: go-to-goal controller (proportional heading + distance

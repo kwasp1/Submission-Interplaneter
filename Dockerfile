@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     ros-jazzy-turtlebot4-navigation \
     ros-jazzy-turtlebot4-viz \
     ros-jazzy-slam-toolbox \
+    ros-jazzy-navigation2 \
+    ros-jazzy-nav2-bringup \
     ros-jazzy-ros-gz \
     ros-jazzy-cv-bridge \
     python3-colcon-common-extensions \
