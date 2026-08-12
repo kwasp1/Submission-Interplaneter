@@ -58,7 +58,7 @@ class WaypointNavigator(Node):
         self.front_obstacle_distance = float('inf')
         self.left_clearance = float('inf')
         self.right_clearance = float('inf')
-        self.contact_floor = 0.2  # meters - obstacle detection trigger distance
+        self.contact_floor = 0.3  # meters - obstacle detection trigger distance
 
         # Escape maneuver: back up -> turn 90 right -> drive forward -> resume.
         # Driven by measured odometry (position/yaw change), not elapsed
@@ -69,7 +69,7 @@ class WaypointNavigator(Node):
         self.avoidance_start_yaw = None
         self.BACKUP_DISTANCE = 0.1
         self.BACKUP_SPEED = -0.15
-        self.TURN_TARGET_RAD = math.radians(88)
+        self.TURN_TARGET_RAD = math.radians(88.0)
         self.TRANSLATE_DISTANCE = 0.5
         self.TRANSLATE_SPEED = 0.3
 
